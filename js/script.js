@@ -86,15 +86,15 @@ option.addEventListener('change', () => {
                 let discountedValue = 0;
                 let discountedProduct = 0;
                 let productValue = document.querySelector("#cost").value;
-                let percentage = document.querySelector("#percentage").value;
-                discountedValue = discount(productValue, percentage);
+                let percentage = (percent(document.querySelector("#percentage").value));
+                discountedValue = (percentage * 100);
                 discountedProduct = discount(productValue, discountedValue);
                 let h3 = document.createElement("h3");
-                h3.innerHTML = `${percentage}% discounted,  leaving the final price at: ${discountedProduct}`;
+                h3.innerHTML = `${discountedValue}% discounted,  leaving the final price at: $ ${discountedProduct}`;
                 container.append(h3)
             }
             break;
-        // Assuming you have a userList array that contains user data
+
 
         case "3":
             container.innerHTML = "";
@@ -156,9 +156,14 @@ function subtract(value1, value2) {
     return total;
 }
 function discount(value1, value2) {
-    let total = (value1 * value2) / 100;
+    let total = (value1 - (value1 * (percent(value2))));
     return total;
 }
+function percent(value2) {
+    let total = (value2 / 100);
+    return total;
+}
+
 function releaseDate(interestData) {
     let charge = parseFloat(document.querySelector("#charge").value);
     let selectedDay = parseInt(document.querySelector("#option").value);
