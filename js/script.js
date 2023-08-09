@@ -99,13 +99,13 @@ option.addEventListener('change', () => {
         case "3":
             container.innerHTML = "";
             let paragraph = document.createElement("p");
-            paragraph.textContent = "User List record: ";
+            paragraph.innerHTML = "User List record: ";
             container.appendChild(paragraph);
 
             let userListElement = document.createElement("ol");
-            for (const user of userList) {
+            for (let i = 0; i < userList.length; i++) {
                 let li = document.createElement("li");
-                li.textContent = JSON.stringify(user);
+                li.innerHTML = JSON.stringify(userList[i]);
                 userListElement.appendChild(li);
             }
 
@@ -114,32 +114,31 @@ option.addEventListener('change', () => {
 
         case "4":
             container.innerHTML = `
-                <label>How much do you want to charge?</label>
+                <label>Insert Loan Amount</label>
                 <br>
-                <input id="charge">
+                <input id="loan">
                 <br>
-                <label>How would you pay?</label>
+                <label>Whats the interest rate?</label>
                 <br>
                 <select name="option" id="option">
                     <option value="default">Choose one </option>
-                    <option id="checkout" value="1">Checkout</option>
-                    <option id="link" value="2">Payment Link</option>
-                    <option id="qrCode" value="3">QR Code</option>
+                    <option id="cash" value="1">Cash</option>
+                    <option id="transfer" value="2">E-transfer Link</option>
                 </select>
                 <br>
                 <label>When do you want to receive the money?</label>
                 <br>
                 <select name="option" id="option">
                     <option value="default">Choose one</option>
-                    <option id="day1" value="1">Immediately</option>
-                    <option id="day15" value="2">15 days</option>
-                    <option id="day30" value="3">30 days</option>
+                    <option id="1" value="1">Immediately</option>
+                    <option id="2" value="2">6 Months</option>
+                    <option id="3" value="3">1 year</option>
                 </select>
                 <br>
                 <br>
                 <button id="calculate">Calculate</button>
             `
-            fetch('/data.json')
+            fetch('/PF-AvilesBelen/data.json')
                 .then((res) => res.json())
                 .then((data) => {
                     let calculateBtn = document.querySelector('#calculate')
@@ -165,8 +164,7 @@ function percent(value2) {
 }
 
 function releaseDate(interestData) {
-    let charge = parseFloat(document.querySelector("#charge").value);
-    let selectedDay = parseInt(document.querySelector("#option").value);
+    let loan = parseFloat(document.querySelector("#loan").value);
 
     let interest = interest.interestPercentage;
 
