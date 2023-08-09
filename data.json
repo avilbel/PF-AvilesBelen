@@ -1,0 +1,5 @@
+[
+    {"day": 1, "interestPercentage": 9.53, "id":1},
+    {"day": 15, "interestPercentage": 5.45, "id":2},
+    {"day": 30, "interestPercentage": 3.77, "id":3}
+]
