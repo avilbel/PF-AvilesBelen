@@ -138,7 +138,7 @@ option.addEventListener('change', () => {
                 <br>
                 <button id="calculate">Calculate</button>
             `
-            fetch('/PF-AvilesBelen/data.json')
+            fetch('https://raw.githubusercontent.com/avilbel/PF-AvilesBelen/main/data.json')
                 .then((res) => res.json())
                 .then((data) => {
                     let calculateBtn = document.querySelector('#calculate')
@@ -163,10 +163,13 @@ function percent(value2) {
     return total;
 }
 
-function releaseDate(interestData) {
+function releaseDate(data) {
     let loan = parseFloat(document.querySelector("#loan").value);
 
-    let interest = interest.interestPercentage;
+    let selectedOption = document.querySelector("#option").value;
+
+    let interestPercentage = data.interestData;
+    let charge = data.interestData.charge;
 
     let discountAmount = discount(charge, interestPercentage);
     let discountedCharge = subtract(charge, discountAmount);
@@ -175,7 +178,7 @@ function releaseDate(interestData) {
     h3.innerHTML = `You will receive $${discountedCharge}.
     <br>
     Discount Amount: ${discountAmount}
-    Release Date: ${selectedDay} days + VAT`;
+    Release Date: ${selectedMonth} month + VAT`;
     container.append(h3);
 }
 
