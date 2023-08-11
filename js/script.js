@@ -131,7 +131,7 @@ option.addEventListener('change', () => {
                     <option id="3" value="3">1 Years</option>
                     <option id="4" value="4">1.5 Years</option>
                     <option id="5" value="5">2 Years</option>
-                    <option id="6" value="3">2.5 Years</option>
+                    <option id="6" value="6">2.5 Years</option>
                 </select>
                 <br>
                 <br>
@@ -161,8 +161,8 @@ function percent(value) {
     let total = (value / 100);
     return total;
 }
-function interestCost(value1, value2, value3, value4) {
-    let total = ((value1 * value2 * value3) + value4);
+function cost(value1, value2, value3, value4) {
+    let total = (((value1 * value2) / value3) + value4);
     return total;
 }
 
@@ -170,21 +170,21 @@ function releaseDate(data) {
     let loan = parseFloat(document.querySelector("#loan").value);
     let userInterest = parseFloat(document.querySelector("#interest").value);
     let interest = percent(userInterest);
+    console.log(interest);
     let termOption = document.querySelector("#optionTerm").value;
 
     const userData = data.find((d) => d.id === parseInt(termOption));
 
     let charge = userData.processingCharges;
 
-    let months = userData.months;
+    let months = userData.month;
 
-    let monthlyCost = interestCost(loan, interest, months, charge);
-    console.log(monthlyCost);
+    let monthlyCost = cost(loan, interest, months, charge);
 
     let h3 = document.createElement("h3");
     h3.innerHTML = `Your monthly interest cost will be:  $${monthlyCost}.
         <br>
-        Processing Fee: ${charge}
+        Processing Fee: ${userData.processingCharges}
         Total Months: ${userData.month}
         `;
     container.append(h3);
