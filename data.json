@@ -1,5 +1,5 @@
 [
-    {"month": 1, "interestData": 9.53, "id":1},
-    {"month": 6, "interestData": 5.45, "id":2},
-    {"month": 12, "interestData": 3.77, "id":3}
+    {"month": 1, "interestData": 9.53, "charge": 0.25,  "id":1},
+    {"month": 6, "interestData": 5.45, "charge": 0.55,"id":2},
+    {"month": 12, "interestData": 3.77,"charge": 0.75, "id":3}
 ]

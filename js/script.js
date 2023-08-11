@@ -128,7 +128,7 @@ option.addEventListener('change', () => {
                 <br>
                 <label>When do you want to pay the loan?</label>
                 <br>
-                <select name="option" id="option">
+                <select name="optionLoan" id="optionLoan">
                     <option value="default">Choose one</option>
                     <option id="1" value="1">Immediately</option>
                     <option id="2" value="2">6 Months</option>
@@ -166,10 +166,14 @@ function percent(value2) {
 function releaseDate(data) {
     let loan = parseFloat(document.querySelector("#loan").value);
 
-    let selectedOption = document.querySelector("#option").value;
 
-    let interestPercentage = data.interestData;
-    let charge = data.interestData.charge;
+    let selectedOption = document.querySelector("#optionReceiveMoney").value;
+    // let interestPercentage = data.interestData;
+    const belemData = data.find((d) => d.id === parseInt(selectedOption));
+
+    let interestPercentage = belemData.interestData;
+    let charge = belemData.charge;
+    // et charge = data.interestData.charge;
 
     let discountAmount = discount(charge, interestPercentage);
     let discountedCharge = subtract(charge, discountAmount);
@@ -182,3 +186,13 @@ function releaseDate(data) {
     container.append(h3);
 }
 
+// function releaseDate(data) {
+//     let loan = parseFloat(document.querySelector("#loan").value);
+
+
+
+
+//     let discountAmount = discount(charge, interestPercentage);
+//     let discountedCharge = subtract(charge, discountAmount);
+
+//     let h3 = document.createElement(
