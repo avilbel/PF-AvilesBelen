@@ -120,19 +120,18 @@ option.addEventListener('change', () => {
                 <br>
                 <label>Whats the interest rate?</label>
                 <br>
-                <select name="option" id="option">
-                    <option value="default">Choose one </option>
-                    <option id="cash" value="1">Cash</option>
-                    <option id="transfer" value="2">E-transfer Link</option>
-                </select>
+                <input id="interest">
                 <br>
                 <label>When do you want to pay the loan?</label>
                 <br>
-                <select name="optionLoan" id="optionLoan">
+                <select name="optionTerm" id="optionTerm">
                     <option value="default">Choose one</option>
-                    <option id="1" value="1">Immediately</option>
+                    <option id="1" value="1">3 Months</option>
                     <option id="2" value="2">6 Months</option>
-                    <option id="3" value="3">1 year</option>
+                    <option id="3" value="3">1 Years</option>
+                    <option id="4" value="4">1.5 Years</option>
+                    <option id="5" value="5">2 Years</option>
+                    <option id="6" value="3">2.5 Years</option>
                 </select>
                 <br>
                 <br>
@@ -158,41 +157,35 @@ function discount(value1, value2) {
     let total = (value1 - (value1 * (percent(value2))));
     return total;
 }
-function percent(value2) {
-    let total = (value2 / 100);
+function percent(value) {
+    let total = (value / 100);
+    return total;
+}
+function interestCost(value1, value2, value3, value4) {
+    let total = ((value1 * value2 * value3) + value4);
     return total;
 }
 
 function releaseDate(data) {
     let loan = parseFloat(document.querySelector("#loan").value);
+    let userInterest = parseFloat(document.querySelector("#interest").value);
+    let interest = percent(userInterest);
+    let termOption = document.querySelector("#optionTerm").value;
 
+    const userData = data.find((d) => d.id === parseInt(termOption));
 
-    let selectedOption = document.querySelector("#optionReceiveMoney").value;
-    // let interestPercentage = data.interestData;
-    const belemData = data.find((d) => d.id === parseInt(selectedOption));
+    let charge = userData.processingCharges;
 
-    let interestPercentage = belemData.interestData;
-    let charge = belemData.charge;
-    // et charge = data.interestData.charge;
+    let months = userData.months;
 
-    let discountAmount = discount(charge, interestPercentage);
-    let discountedCharge = subtract(charge, discountAmount);
+    let monthlyCost = interestCost(loan, interest, months, charge);
+    console.log(monthlyCost);
 
     let h3 = document.createElement("h3");
-    h3.innerHTML = `You will receive $${discountedCharge}.
-    <br>
-    Discount Amount: ${discountAmount}
-    Release Date: ${selectedMonth} month + VAT`;
+    h3.innerHTML = `Your monthly interest cost will be:  $${monthlyCost}.
+        <br>
+        Processing Fee: ${charge}
+        Total Months: ${userData.month}
+        `;
     container.append(h3);
 }
-
-// function releaseDate(data) {
-//     let loan = parseFloat(document.querySelector("#loan").value);
-
-
-
-
-//     let discountAmount = discount(charge, interestPercentage);
-//     let discountedCharge = subtract(charge, discountAmount);
-
-//     let h3 = document.createElement(

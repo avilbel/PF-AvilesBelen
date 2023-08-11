@@ -1,5 +1,8 @@
 [
-    {"month": 1, "interestData": 9.53, "charge": 0.25,  "id":1},
-    {"month": 6, "interestData": 5.45, "charge": 0.55,"id":2},
-    {"month": 12, "interestData": 3.77,"charge": 0.75, "id":3}
+    {"period": 3, "processingCharges": 3.77, "month": 3,  "id":1},
+    {"period": 6, "processingCharges": 5.45, "month": 6,"id":2},
+    {"period": 1, "processingCharges": 6.57,"month": 12, "id":3},
+    {"period": 1.5, "processingCharges": 8.33,"month": 18, "id":4},
+    {"period": 2, "processingCharges": 11.37,"month": 24, "id":5},
+    {"period": 2.5, "processingCharges": 15.44,"month": 30, "id":6}
 ]
