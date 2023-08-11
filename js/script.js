@@ -126,7 +126,7 @@ option.addEventListener('change', () => {
                     <option id="transfer" value="2">E-transfer Link</option>
                 </select>
                 <br>
-                <label>When do you want to receive the money?</label>
+                <label>When do you want to pay the loan?</label>
                 <br>
                 <select name="option" id="option">
                     <option value="default">Choose one</option>
